@@ -22,7 +22,7 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private String category;
+    private Integer category;
     private Integer owner;
     private Integer createdBy;
     private LocalDate date;

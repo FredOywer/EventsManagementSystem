@@ -1,8 +1,10 @@
 package com.fred.event_service.controller;
 
+import com.fred.event_service.model.ApiResponse;
 import com.fred.event_service.model.Event;
 import com.fred.event_service.model.EventRequest;
 import com.fred.event_service.service.EventService;
+import com.fred.event_service.util.Constants;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,8 +35,22 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<Event> createEvent(@RequestBody EventRequest eventRequest){
+    public ResponseEntity<ApiResponse> createEvent(@RequestBody EventRequest eventRequest){
+        ApiResponse apiResponse = new ApiResponse();
 
+        if (eventRequest.getImage().isEmpty()){
+            apiResponse.setResultCode(Constants.CODE_500);
+            apiResponse.setMessage("No file uploaded");
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(apiResponse);
+        }
+
+        Event event = eventService.createEvent(eventRequest);
+        apiResponse.setResultCode(Constants.CODE_200);
+        apiResponse.setData(event);
+        return ResponseEntity.ok(apiResponse);
     }
 
     @DeleteMapping("/{id}")
