@@ -27,10 +27,9 @@ public class Event {
     private String details;
     private Integer owner;
     private Integer venue;
-    private Integer createdBy;
     private Boolean isDeleted;
-    private LocalDate date;
+    private Integer createdBy;
+    private LocalDate eventDate;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-
 }

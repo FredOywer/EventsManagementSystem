@@ -2,10 +2,7 @@ package com.fred.event_service.controller;
 
 import com.fred.event_service.model.ApiResponse;
 import com.fred.event_service.model.Category;
-import com.fred.event_service.model.Event;
-import com.fred.event_service.model.EventRequest;
 import com.fred.event_service.service.CategoryService;
-import com.fred.event_service.service.EventService;
 import com.fred.event_service.util.Constants;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

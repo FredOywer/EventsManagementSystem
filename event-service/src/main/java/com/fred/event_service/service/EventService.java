@@ -38,7 +38,7 @@ public class EventService {
 
         EventImage eventImage = new EventImage();
         eventImage.setEventId(savedEvent.getId());
-        eventImage.setImageUrl(path);
+        eventImage.setImageUri(path);
         imageRepository.save(eventImage);
 
         return savedEvent;

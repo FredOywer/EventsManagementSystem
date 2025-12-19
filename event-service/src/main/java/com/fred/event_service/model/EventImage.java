@@ -19,6 +19,6 @@ public class EventImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer eventId;
-    private String imageUrl;
+    private String imageUri;
     private Boolean isMain;
 }
