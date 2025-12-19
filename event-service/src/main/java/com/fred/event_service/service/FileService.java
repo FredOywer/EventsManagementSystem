@@ -1,6 +1,7 @@
 package com.fred.event_service.service;
 
 import com.fred.event_service.config.AppConfig;
+import com.fred.event_service.util.Common;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,9 @@ public class FileService {
         try {
             byte[] imageBytes = file.getBytes();
             String originalName = file.getOriginalFilename();
+            String timestamp = Common.getTimestamp();
 
-            Path path = Paths.get(cfg.getEventImagePath() + originalName);
+            Path path = Paths.get(cfg.getEventImagePath() + originalName + timestamp);
             Files.createDirectories(path.getParent());
             Files.write(path, imageBytes);
             return path.toString();

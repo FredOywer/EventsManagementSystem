@@ -23,8 +23,12 @@ public class Event {
     private Integer id;
     private String name;
     private Integer category;
+    private String summary;
+    private String details;
     private Integer owner;
+    private Integer venue;
     private Integer createdBy;
+    private Boolean isDeleted;
     private LocalDate date;
     private LocalDateTime startTime;
     private LocalDateTime endTime;

@@ -20,5 +20,5 @@ public class EventImage {
     private Integer id;
     private Integer eventId;
     private String imageUrl;
-    private boolean isMain;
+    private Boolean isMain;
 }

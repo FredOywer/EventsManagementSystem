@@ -34,6 +34,7 @@ public class EventService {
         Event savedEvent = eventRepository.save(objectMapper.convertValue(request, Event.class));
 
         String path = fileService.saveImage(request.getImage());
+        //todo save more event images
 
         EventImage eventImage = new EventImage();
         eventImage.setEventId(savedEvent.getId());
@@ -44,6 +45,7 @@ public class EventService {
     }
 
     public void deleteEvent(Integer eventId){
+        //change status
         eventRepository.deleteById(eventId);
     }
 }
