@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -23,5 +23,5 @@ public class Category {
     private Integer id;
     @NotBlank(message = "Category name required")
     private String name;
-    private LocalDateTime dateCreated;
+//    private LocalDate dateCreated;
 }
