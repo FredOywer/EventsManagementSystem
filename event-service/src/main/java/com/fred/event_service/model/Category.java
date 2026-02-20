@@ -20,7 +20,7 @@ import java.time.LocalDate;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @NotBlank(message = "Category name required")
     private String name;
 //    private LocalDate dateCreated;

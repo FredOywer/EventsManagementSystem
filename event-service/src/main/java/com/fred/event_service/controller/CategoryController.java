@@ -25,7 +25,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getCategory(@PathVariable Integer id){
+    public ResponseEntity<Category> getCategory(@PathVariable Long id){
         Category category = categoryService.getCategory(id).orElse(null);
         if (category != null){
             return ResponseEntity.ok(category);
@@ -43,7 +43,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Integer id){
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id){
         Category category = categoryService.getCategory(id).orElse(null);
         if (category != null){
             categoryService.deleteCategory(id);

@@ -20,15 +20,15 @@ import java.time.LocalDateTime;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String name;
-    private Integer category;
+    private Long category;
     private String summary;
     private String details;
-    private Integer owner;
-    private Integer venue;
+    private Long owner;
+    private Long venue;
     private Boolean isDeleted;
-    private Integer createdBy;
+    private Long createdBy;
     private LocalDate eventDate;
     private LocalDateTime startTime;
     private LocalDateTime endTime;

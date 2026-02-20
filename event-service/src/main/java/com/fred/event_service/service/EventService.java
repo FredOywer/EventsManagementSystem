@@ -1,14 +1,17 @@
 package com.fred.event_service.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fred.event_service.model.ApiResponse;
 import com.fred.event_service.model.Event;
 import com.fred.event_service.model.EventImage;
 import com.fred.event_service.model.EventRequest;
 import com.fred.event_service.repository.EventImageRepository;
 import com.fred.event_service.repository.EventRepository;
+import com.fred.event_service.util.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,28 +27,44 @@ public class EventService {
         return eventRepository.findAll();
     }
 
-    public Optional<Event> getEvent(Integer eventId){
+    public Optional<Event> getEvent(Long eventId){
         return eventRepository.findById(eventId);
     }
 
-    @Transactional
     public Event createEvent(EventRequest request){
         ObjectMapper objectMapper = new ObjectMapper();
-        Event savedEvent = eventRepository.save(objectMapper.convertValue(request, Event.class));
+        return eventRepository.save(objectMapper.convertValue(request, Event.class));
+    }
 
-        String path = fileService.saveImage(request.getImage());
-        //todo save more event images
+    public void deleteEvent(Long eventId){
+        //todo change status instead
+        eventRepository.deleteById(eventId);
+    }
+
+    public ApiResponse uploadEventImage(Long id, MultipartFile file){
+        ApiResponse apiResponse = new ApiResponse();
+
+        Event event = getEvent(id).orElse(null);
+        if (event == null){
+            apiResponse.setResultCode(Constants.CODE_500);
+            apiResponse.setMessage("Event not found");
+            return apiResponse;
+        }
+
+        String path = fileService.saveImage(file);
+        if (path != null){
+            apiResponse.setResultCode(Constants.CODE_500);
+            apiResponse.setMessage("Error occurred while saving image");
+            return apiResponse;
+        }
 
         EventImage eventImage = new EventImage();
-        eventImage.setEventId(savedEvent.getId());
+        eventImage.setEventId(event.getId());
         eventImage.setImageUri(path);
         imageRepository.save(eventImage);
 
-        return savedEvent;
-    }
-
-    public void deleteEvent(Integer eventId){
-        //change status
-        eventRepository.deleteById(eventId);
+        apiResponse.setResultCode(Constants.CODE_200);
+        apiResponse.setData(path);
+        return apiResponse;
     }
 }

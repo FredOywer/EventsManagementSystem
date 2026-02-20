@@ -17,7 +17,7 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public Optional<Category> getCategory(Integer categoryId){
+    public Optional<Category> getCategory(Long categoryId){
         return categoryRepository.findById(categoryId);
     }
 
@@ -25,7 +25,7 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
-    public void deleteCategory(int id){
+    public void deleteCategory(Long id){
         categoryRepository.deleteById(id);
     }
 }
